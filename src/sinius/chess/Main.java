@@ -31,5 +31,9 @@ public class Main {
 			e.printStackTrace();
 		}
 	}
+	
+	public static void color(int x, int y){
+		board.selected[y][x] = true;
+	}
 
 }

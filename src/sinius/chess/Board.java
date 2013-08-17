@@ -76,18 +76,7 @@ public class Board {
 			return;
 		}
 		
-		for(int x = 0 ; x<8; x++){
-			for(int y = 0; y<8 ; y++){
-				if(x == movingX && y == movingY){
-					selected[x][y] = false;
-					continue;
-				}
-				if(pieces[movingX][movingY].canGoHere(movingX, movingY, y, x)){
-					selected[x][y] = true;
-				}
-
-			}
-		}
+		pieces[movingX][movingY].ColorPlacesCan(movingX, movingY);
 	}
 	
 	public int getColor(int x, int y){

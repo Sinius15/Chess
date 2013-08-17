@@ -5,6 +5,6 @@ import java.io.File;
 public interface Piece {
 
 	public File getImg();
-	public boolean canGoHere(int isX, int isY, int toX, int toY);
+	public void ColorPlacesCan(int x, int y);
 	public int nr();
 }

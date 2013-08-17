@@ -1,7 +1,6 @@
 package sinius.chess.pieces;
 
 import java.io.File;
-
 import sinius.chess.Main;
 import sinius.chess.Piece;
 
@@ -18,41 +17,33 @@ public class WhitePawn implements Piece{
 		return 1;
 	}
 
+
 	@Override
-	public boolean canGoHere(int isX, int isY, int toX, int toY) {
-		//dit stuk is voor slaan linksboven
-		int x = isX-1;										
-		int y = isY-1;
-		if(toX == x && toY == y){
-			if(Main.board.getColor(x, y) == 2){
-				return true;
+	public void ColorPlacesCan(int x, int y) {
+		if(y==0){
+			return;
+		}
+		if(x > 0){								//slaan linksbovne
+			if(Main.board.getColor(x-1, y-1) == 2){			
+				Main.color(x-1, y-1);
 			}
 		}
-		//dit stuk is voor slaan rechtsboven
-		x = isX+1;											
-		y = isY-1;
-		if(toX == x && toY == y){
-			if(Main.board.getColor(x, y) == 2){
-				return true;
+		if(x < 7){								//slaan rechtsboven
+			if(Main.board.getColor(x+1, y-1) == 2){ 
+				Main.color(x+1, y-1);
+			}
+		}
+		boolean b = false;
+		if(Main.board.pieces[x][y-1].nr() == 0){ //1 omhoog
+			b = true;
+			Main.color(x, y-1);
+		}
+		if(b){
+			if(Main.board.pieces[x][y-2].nr() == 0 && y==6){ //twee omhoog bij startpositie
+				Main.color(x, y-2);
 			}
 		}
 		
-		//dit stuk is voor 1 omhoog
-		if(Main.board.pieces[isX][isY-1].nr() != 0){		
-			return false;
-		}
-		if(isX==toX && isY-1==toY){
-			return true;
-		}
-		//dit stuk is voor twee omhoog
-		if(Main.board.pieces[isX][isY-2].nr() != 0){		
-			return false;
-		}
-		if(isX==toX && isY==6 && isY-2==toY){
-			return true;
-		}
-		
-		return false;
 	}
 
 }

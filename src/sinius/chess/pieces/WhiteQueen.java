@@ -18,9 +18,10 @@ public class WhiteQueen  implements Piece{
 	}
 
 	@Override
-	public boolean canGoHere(int isX, int isY, int toX, int toY) {
-		// TODO Auto-generated method stub
-		return false;
+	public void ColorPlacesCan(int x, int y) {
+		
+		return;
 	}
+
 
 }

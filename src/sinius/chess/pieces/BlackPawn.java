@@ -19,38 +19,30 @@ public class BlackPawn implements Piece{
 	}
 
 	@Override
-	public boolean canGoHere(int isX, int isY, int toX, int toY) {
-//dit stuk is voor slaan linksboven
-		int x = isX-1;										
-		int y = isY+1;
-		if(toX == x && toY == y){
-			if(Main.board.getColor(x, y) == 1){
-				return true;
+	public void ColorPlacesCan(int x, int y) {
+		if(y==7){
+			return;
+		}
+		if(x > 0){								//slaan linksonder
+			if(Main.board.getColor(x-1, y+1) == 1){			
+				Main.color(x-1, y+1);
 			}
 		}
-//dit stuk is voor slaan rechtsboven
-		x = isX+1;											
-		y = isY+1;
-		if(toX == x && toY == y){
-			if(Main.board.getColor(x, y) == 1){
-				return true;
+		if(x < 7){								//slaan rechtsonder
+			if(Main.board.getColor(x+1, y+1) == 1){ 
+				Main.color(x+1, y+1);
 			}
 		}
-//dit stuk is voor 1 benede
-		if(Main.board.pieces[isX][isY+1].nr() != 0){		
-			return false;
+		boolean b = false;
+		if(Main.board.pieces[x][y+1].nr() == 0){ //1 beneden
+			b= true;
+			Main.color(x, y+1);
 		}
-		if(isX==toX && isY+1==toY){
-			return true;
-		}
-//dit stuk is voor twee beneden
-		if(Main.board.pieces[isX][isY+2].nr() != 0){		
-			return false;
-		}
-		if(isX==toX && isY==1 && isY+2==toY){
-			return true;
+		if(b){
+			if(Main.board.pieces[x][y+2].nr() == 0 && y==1){ //twee omhoog bij startpositie
+				Main.color(x, y+2);
+			}
 		}
 		
-		return false;
 	}
 }
