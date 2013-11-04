@@ -16,7 +16,7 @@ public class Board {
 	public List<Piece> avalablePieces = new ArrayList<>();
 	public static LFile file;
 	
-	public int movingX, movingY;
+	public int selectedPieceX, selectedPieceY;
 	
 	public Board(File f){
 		fillPieceList();
@@ -72,11 +72,10 @@ public class Board {
 	}
 	
 	public void setSelected(){
-		if(movingX == -1 || movingY == -1){
+		if(selectedPieceX == -1 || selectedPieceY == -1){
 			return;
 		}
-		
-		pieces[movingX][movingY].ColorPlacesCan(movingX, movingY);
+		pieces[selectedPieceX][selectedPieceY].ColorPlacesCan(selectedPieceX, selectedPieceY);
 	}
 	
 	public int getColor(int x, int y){
@@ -88,11 +87,5 @@ public class Board {
 			return 2;	//black
 		}
 		return 1;		//white
-	}
-	
-	public boolean isBoardPiecesBlack(int ix, int y){
-		
-		
-		return false;
 	}
 }

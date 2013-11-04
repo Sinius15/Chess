@@ -2,7 +2,8 @@ package sinius.chess;
 
 import java.awt.Color;
 import java.io.File;
-import java.io.IOException;
+
+import sinius.chess.io.ImageLoader;
 
 public class Main {
 
@@ -11,10 +12,13 @@ public class Main {
 	
 	public static Color black = new Color(209, 139, 71);
 	public static Color white = new Color(255, 206, 158);
-	public static Color black_selected = new Color(159, 139, 71);
-	public static Color white_selected = new Color(205, 206, 158);
+	public static Color black_selected = Color.red;
+	public static Color white_selected = Color.red;
+	
+	public static boolean canPlay;
 	
 	public static void main(String[] args) {
+		ImageLoader.init();
 		gui = new Gui();
 		board = new Board(new File("rec/startGame.chess"));
 		updateAll();
@@ -25,11 +29,8 @@ public class Main {
 		board.cleanSelected();
 		board.setSelected();
 		gui.drawSelected();
-		try {
-			gui.drawPieces();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		gui.drawPieces();
+		checkSpecial.Start();
 	}
 	
 	public static void color(int x, int y){

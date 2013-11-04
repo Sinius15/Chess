@@ -1,13 +1,13 @@
 package sinius.chess.pieces;
 
-import java.io.File;
+import java.awt.Image;
 
 import sinius.chess.Piece;
 
 public class Empty implements Piece{
 
 	@Override
-	public File getImg() {
+	public Image getImg() {
 		return null;
 	}
 

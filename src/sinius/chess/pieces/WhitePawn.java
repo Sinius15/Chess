@@ -1,14 +1,16 @@
 package sinius.chess.pieces;
 
-import java.io.File;
+import java.awt.Image;
+
 import sinius.chess.Main;
 import sinius.chess.Piece;
+import sinius.chess.io.ImageLoader;
 
 public class WhitePawn implements Piece{
 
 	@Override
-	public File getImg() {
-		return new File("rec/Pawn_white.png");
+	public Image getImg() {
+		return ImageLoader.baseImage.getImageById(8);
 	}
 
 
@@ -39,9 +41,21 @@ public class WhitePawn implements Piece{
 			Main.color(x, y-1);
 		}
 		if(b){
-			if(Main.board.pieces[x][y-2].nr() == 0 && y==6){ //twee omhoog bij startpositie
-				Main.color(x, y-2);
+			if(y==6){							 //twee omhoog bij startpositie
+				if(canGo(x, y-2)) Main.color(x, y-2);
 			}
+		}
+		
+	}
+	
+	private boolean canGo(int x,  int y){
+		if(x<0 || x>7 || y<0 || y>7){
+			return false;
+		}
+		if(Main.board.pieces[x][y].nr() == 0){
+			return true;
+		}else{
+			return false;
 		}
 		
 	}

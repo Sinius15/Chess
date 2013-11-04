@@ -1,15 +1,16 @@
 package sinius.chess.pieces;
 
-import java.io.File;
+import java.awt.Image;
 
 import sinius.chess.Main;
 import sinius.chess.Piece;
+import sinius.chess.io.ImageLoader;
 
 public class BlackBishop implements Piece {
 
 	@Override
-	public File getImg() {
-		return new File("rec/Bishop_black.png");
+	public Image getImg() {
+		return ImageLoader.baseImage.getImageById(9);
 	}
 	
 	@Override

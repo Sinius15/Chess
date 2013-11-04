@@ -1,10 +1,10 @@
 package sinius.chess;
 
-import java.io.File;
+import java.awt.Image;
 
 public interface Piece {
 
-	public File getImg();
+	public Image getImg();
 	public void ColorPlacesCan(int x, int y);
 	public int nr();
 }

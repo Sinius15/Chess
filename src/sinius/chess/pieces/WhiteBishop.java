@@ -1,15 +1,16 @@
 package sinius.chess.pieces;
 
-import java.io.File;
+import java.awt.Image;
 
 import sinius.chess.Main;
 import sinius.chess.Piece;
+import sinius.chess.io.ImageLoader;
 
 public class WhiteBishop implements Piece {
 
 	@Override
-	public File getImg() {
-		return new File("rec/Bishop_white.png");
+	public Image getImg() {
+		return ImageLoader.baseImage.getImageById(10);
 	}
 
 
@@ -36,7 +37,6 @@ public class WhiteBishop implements Piece {
 			if(!doall(x+i,y-i))
 				break;
 		}
-		return;
 	}
 	
 	private boolean doall(int x, int y){
