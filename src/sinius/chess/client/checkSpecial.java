@@ -1,4 +1,5 @@
-package sinius.chess;
+package sinius.chess.client;
+
 
 public class checkSpecial {
 

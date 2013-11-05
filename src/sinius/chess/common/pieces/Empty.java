@@ -1,8 +1,6 @@
-package sinius.chess.pieces;
+package sinius.chess.common.pieces;
 
 import java.awt.Image;
-
-import sinius.chess.Piece;
 
 public class Empty implements Piece{
 

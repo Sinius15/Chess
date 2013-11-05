@@ -1,10 +1,9 @@
-package sinius.chess.pieces;
+package sinius.chess.common.pieces;
 
 import java.awt.Image;
 
-import sinius.chess.Main;
-import sinius.chess.Piece;
-import sinius.chess.io.ImageLoader;
+import sinius.chess.client.ImageLoader;
+import sinius.chess.client.Main;
 
 public class WhiteKing  implements Piece{
 

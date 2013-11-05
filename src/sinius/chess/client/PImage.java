@@ -1,4 +1,4 @@
-package sinius.chess.io;
+package sinius.chess.client;
 
 import java.awt.Color;
 import java.awt.Dimension;

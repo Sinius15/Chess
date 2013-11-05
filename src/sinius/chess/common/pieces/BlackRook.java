@@ -1,42 +1,42 @@
-package sinius.chess.pieces;
+package sinius.chess.common.pieces;
 
 import java.awt.Image;
 
-import sinius.chess.Main;
-import sinius.chess.Piece;
-import sinius.chess.io.ImageLoader;
+import sinius.chess.client.ImageLoader;
+import sinius.chess.client.Main;
 
-public class WhiteBishop implements Piece {
+public class BlackRook implements Piece {
 
 	@Override
 	public Image getImg() {
-		return ImageLoader.baseImage.getImageById(10);
+		return ImageLoader.baseImage.getImageById(5);
 	}
 
 
 	@Override
 	public int nr() {
-		return 5;
+		return 8;
 	}
 
 	@Override
 	public void ColorPlacesCan(int x, int y) {
 		for(int i = 1; i<8; i++){
-			if(!doall(x+i,y+i))
+			if(!doall(x+i,y))
 				break;
 		}
 		for(int i = 1; i<8; i++){
-			if(!doall(x-i,y-i))
+			if(!doall(x-i,y))
 				break;
 		}
 		for(int i = 1; i<8; i++){
-			if(!doall(x-i,y+i))
+			if(!doall(x,y+i))
 				break;
 		}
 		for(int i = 1; i<8; i++){
-			if(!doall(x+i,y-i))
+			if(!doall(x,y-i))
 				break;
 		}
+
 	}
 	
 	private boolean doall(int x, int y){
@@ -47,7 +47,7 @@ public class WhiteBishop implements Piece {
 			Main.color(x, y);
 			return true;
 		}else{
-			if(Main.board.getColor(x, y) == 2){
+			if(Main.board.getColor(x, y) == 1){
 				Main.color(x, y);
 				return false;
 			}

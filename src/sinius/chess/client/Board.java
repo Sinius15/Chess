@@ -1,12 +1,26 @@
-package sinius.chess;
+package sinius.chess.client;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import sinius.chess.pieces.*;
-import fileHandling.LFile;
+import sinius.chess.common.pieces.BlackBishop;
+import sinius.chess.common.pieces.BlackKing;
+import sinius.chess.common.pieces.BlackKnight;
+import sinius.chess.common.pieces.BlackPawn;
+import sinius.chess.common.pieces.BlackQueen;
+import sinius.chess.common.pieces.BlackRook;
+import sinius.chess.common.pieces.Empty;
+import sinius.chess.common.pieces.Piece;
+import sinius.chess.common.pieces.WhiteBishop;
+import sinius.chess.common.pieces.WhiteKing;
+import sinius.chess.common.pieces.WhiteKnight;
+import sinius.chess.common.pieces.WhitePawn;
+import sinius.chess.common.pieces.WhiteQueen;
+import sinius.chess.common.pieces.WhiteRook;
 
 public class Board {
 
@@ -14,16 +28,21 @@ public class Board {
 	public boolean[][] selected = new boolean[8][8];
 	
 	public List<Piece> avalablePieces = new ArrayList<>();
-	public static LFile file;
 	
 	public int selectedPieceX, selectedPieceY;
 	
-	public Board(File f){
+	@SuppressWarnings("resource")
+	public Board(File file){
 		fillPieceList();
-		file = new LFile(f);
-		String[] in;
+
+		String[] in = new String[8];
 		try {
-			in = file.open(false);
+			//InputStream stream = getClass().getResourceAsStream("rec/startGame.chess");
+			//BufferedReader reader = new BufferedReader(new InputStreamReader(stream, "UTF-8"));
+			
+			BufferedReader reader = new BufferedReader(new FileReader(file));
+			for(int i = 0; i<8;i++)
+				in[i] = reader.readLine();
 		} catch (IOException e) {
 			e.printStackTrace();
 			return;

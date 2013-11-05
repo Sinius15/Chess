@@ -1,4 +1,4 @@
-package sinius.chess;
+package sinius.chess.common.pieces;
 
 import java.awt.Image;
 

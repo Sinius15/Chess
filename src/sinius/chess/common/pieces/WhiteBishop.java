@@ -1,42 +1,25 @@
-package sinius.chess.pieces;
+package sinius.chess.common.pieces;
 
 import java.awt.Image;
 
-import sinius.chess.Main;
-import sinius.chess.Piece;
-import sinius.chess.io.ImageLoader;
+import sinius.chess.client.ImageLoader;
+import sinius.chess.client.Main;
 
-public class BlackQueen  implements Piece{
+public class WhiteBishop implements Piece {
 
 	@Override
 	public Image getImg() {
-		return ImageLoader.baseImage.getImageById(3);
+		return ImageLoader.baseImage.getImageById(10);
 	}
 
 
 	@Override
 	public int nr() {
-		return 10;
+		return 5;
 	}
 
 	@Override
 	public void ColorPlacesCan(int x, int y) {
-		for(int i = 1; i<8; i++){
-			if(!doall(x+i,y))
-				break;
-		}
-		for(int i = 1; i<8; i++){
-			if(!doall(x-i,y))
-				break;
-		}
-		for(int i = 1; i<8; i++){
-			if(!doall(x,y+i))
-				break;
-		}
-		for(int i = 1; i<8; i++){
-			if(!doall(x,y-i))
-				break;
-		}
 		for(int i = 1; i<8; i++){
 			if(!doall(x+i,y+i))
 				break;
@@ -63,7 +46,7 @@ public class BlackQueen  implements Piece{
 			Main.color(x, y);
 			return true;
 		}else{
-			if(Main.board.getColor(x, y) == 1){
+			if(Main.board.getColor(x, y) == 2){
 				Main.color(x, y);
 				return false;
 			}

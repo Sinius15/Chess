@@ -1,9 +1,7 @@
-package sinius.chess;
+package sinius.chess.client;
 
 import java.awt.Color;
 import java.io.File;
-
-import sinius.chess.io.ImageLoader;
 
 public class Main {
 
@@ -31,6 +29,8 @@ public class Main {
 		gui.drawSelected();
 		gui.drawPieces();
 		checkSpecial.Start();
+		gui.frame.canvas.repaint();
+		gui.frame.canvas.paint(gui.graphics);
 	}
 	
 	public static void color(int x, int y){
