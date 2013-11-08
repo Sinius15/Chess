@@ -2,12 +2,13 @@ package sinius.chess.client;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Graphics2D;
+import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -21,13 +22,15 @@ public class Gui {
 
 	ChessFrame frame;
 	Dimension dim = new Dimension(400,400);
-	Graphics2D graphics ;
+	BufferedImage canvas;
+	Graphics graphics;
 
 	public Gui(){
 		frame = new ChessFrame();
 		frame.setVisible(true);
-		frame.canvas.addMouseListener(new KeyHandler());
-		graphics = (Graphics2D) frame.canvas.getGraphics();
+		frame.getContentPane().addMouseListener(new KeyHandler());
+		canvas = new BufferedImage(400, 400, BufferedImage.TYPE_INT_ARGB);
+		graphics = canvas.createGraphics();
 		drawBoard();
 	}
 
@@ -72,7 +75,6 @@ public class Gui {
 				
 			}
 		}
-
 	}
 	
 	public static class ChoseFrame extends JFrame {

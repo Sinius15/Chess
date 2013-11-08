@@ -1,38 +1,38 @@
 package sinius.chess.client;
 
-import java.awt.Canvas;
 import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 
 public class ChessFrame extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-	private JPanel contentPane;
+	private DrawPane contentPane;
 	public JLabel status;
-	public Canvas canvas;
+	public BufferedImage canvas;
 	
 	public ChessFrame() {
-		setResizable(false);
+
 		setTitle("Sinius's Chess");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 407, 455);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane = new DrawPane();
+		contentPane.setPreferredSize(new Dimension(400, 400));
 		setContentPane(contentPane);
-		contentPane.setLayout(null);
+		setResizable(false);
+		pack();
 		
-		canvas = new Canvas();
-		canvas.setBounds(0, 0, 400, 400);
-		canvas.setPreferredSize(new Dimension(400, 400));
-		contentPane.add(canvas);
-		
-		JLabel status = new JLabel("Turn: ");
-		status.setBounds(4, 406, 63, 14);
-		contentPane.add(status);
 		setLocationRelativeTo(null);
+	}
+	
+	public class DrawPane extends JPanel{
+		private static final long serialVersionUID = 1L;
+		@Override
+		public void paintComponents(Graphics g) {
+			g.drawImage(Main.gui.canvas, 0, 0, null);
+		}
 	}
 }

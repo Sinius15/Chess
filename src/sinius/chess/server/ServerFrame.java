@@ -39,6 +39,7 @@ public class ServerFrame extends JFrame {
 		contentPane.add(scrollPane, BorderLayout.CENTER);
 		
 		console = new JTextPane();
+		console.setEditable(false);
 	    kit = new HTMLEditorKit();
 	    doc = new HTMLDocument();
 	    console.setEditorKit(kit);
@@ -48,7 +49,7 @@ public class ServerFrame extends JFrame {
 		input = new JTextField();
 		input.addKeyListener(new KeyAdapter() {
 			@Override
-			public void keyTyped(KeyEvent e) {
+			public void keyReleased(KeyEvent e) {
 				if(e.getKeyCode() == KeyEvent.VK_ENTER){
 					InputHandler.handleInput(input.getText());
 					input.setText("");
@@ -74,6 +75,12 @@ public class ServerFrame extends JFrame {
 	public void errorMessage(String s){
 		try {
 			kit.insertHTML(doc, doc.getLength(), "<font color=\"red\">[error]</font> " + s, 0, 0, null);
+		} catch (BadLocationException | IOException e) {}
+	}
+	
+	public void userMessage(String s){
+		try {
+			kit.insertHTML(doc, doc.getLength(), "<font color=\"orange\">[user]</font> " + s, 0, 0, null);
 		} catch (BadLocationException | IOException e) {}
 	}
 
