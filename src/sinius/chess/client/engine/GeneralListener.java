@@ -8,6 +8,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
+import sinius.chess.client.Game;
 import sinius.chess.client.state.StatsOverlay;
 import sinius.chess.common.SynchroniezedList;
 
@@ -16,23 +17,22 @@ public class GeneralListener implements ComponentListener, KeyListener, MouseLis
 	public SynchroniezedList<Integer> pressedKeys = new SynchroniezedList<Integer>();
 	public SynchroniezedList<Integer> pressedMouse = new SynchroniezedList<Integer>();
 	
-	public int latestMouseX, latestMouseY, mouseX, mouseY;
-
+	public static int latestMouseX, latestMouseY, mouseX, mouseY;
+	
 	@Override
 	public void mouseDragged(MouseEvent event) {
+		int mX = (int) (event.getX()/Game.display.getZoomX());
+		int mY = (int) (event.getY()/Game.display.getZoomY());
 		
-		int mouseX = event.getX();
-		int mouseY = event.getY();
-		
-		if(mouseX ==this.mouseX && mouseY == this.mouseY){
+		if(mX ==mouseX && mY == mouseY){
 			return;
 		}
 		
-		if(mouseX <800 && mouseX>=0 && mouseY <800 && mouseY>=0){
-			latestMouseX = this.mouseX;
-			latestMouseY = this.mouseY;
-			this.mouseX = mouseX;
-			this.mouseY = mouseY;
+		if(mX <Game.display.contentSize.width && mX>=0 && mY <Game.display.contentSize.height && mY>=0){
+			latestMouseX = mouseX;
+			latestMouseY = mouseY;
+			mouseX = mX;
+			mouseY = mY;
 		}else{
 			latestMouseX = -1;
 			mouseX = -1;
@@ -42,23 +42,22 @@ public class GeneralListener implements ComponentListener, KeyListener, MouseLis
 
 	@Override
 	public void mouseMoved(MouseEvent event) {
+		int mX = (int) (event.getX()/Game.display.getZoomX());
+		int mY = (int) (event.getY()/Game.display.getZoomY());
 		
-		int mouseX = event.getX();
-		int mouseY = event.getY();
-		
-		if(mouseX == this.mouseX && mouseY == this.mouseY){
+		if(mX ==mouseX && mY == mouseY){
 			return;
 		}
 		
-		if(mouseX <800 && mouseX>=0 && mouseY <800 && mouseY>=0){
-			this.latestMouseX = this.mouseX;
-			this.latestMouseY = this.mouseY;
-			this.mouseX = mouseX;
-			this.mouseY = mouseY;
+		if(mX <Game.display.contentSize.width && mX>=0 && mY <Game.display.contentSize.height && mY>=0){
+			latestMouseX = mouseX;
+			latestMouseY = mouseY;
+			mouseX = mX;
+			mouseY = mY;
 		}else{
-			this.latestMouseX = -1;
-			this.mouseX = -1;
-			this.mouseY = -1;
+			latestMouseX = -1;
+			mouseX = -1;
+			mouseY = -1;
 		}
 	}
 
@@ -72,8 +71,8 @@ public class GeneralListener implements ComponentListener, KeyListener, MouseLis
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-		this.mouseX = -1;
-		this.mouseY = -1;
+		mouseX = -1;
+		mouseY = -1;
 	}
 
 	@Override

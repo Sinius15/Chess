@@ -1,14 +1,10 @@
 package sinius.chess.client;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -16,66 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import sinius.chess.common.pieces.Piece;
-
 public class Gui {
-
-	ChessFrame frame;
-	Dimension dim = new Dimension(400,400);
-	BufferedImage canvas;
-	Graphics graphics;
-
-	public Gui(){
-		frame = new ChessFrame();
-		frame.setVisible(true);
-		frame.getContentPane().addMouseListener(new KeyHandler());
-		canvas = new BufferedImage(400, 400, BufferedImage.TYPE_INT_ARGB);
-		graphics = canvas.createGraphics();
-		drawBoard();
-	}
-
-
-	public void drawBoard(){
-		graphics.setColor(Game.white);
-        for(int row = 0; row<=8;row++){
-        	for(int colom = 0; colom <= 8; colom++){
-        		graphics.fillRect(colom*50, row*50, 50, 50);
-        		if(graphics.getColor().equals(Game.white)){
-        			graphics.setColor(Game.black);
-	        	}else{
-	        		graphics.setColor(Game.white);
-	        	}
-        	}
-        }
-	}
-
-	public void drawSelected(){
-        for(int x = 0; x<8;x++){
-        	for(int y = 0; y < 8; y++){
-        		if(Game.board.selected[y][x]){
-        			graphics.setColor(Color.pink);
-        			graphics.fillRect(x*50, y*50, 50, 50);
-        			
-        		}
-        		
-        	}
-        }
-	}
-
-
-
-	public void drawPieces(){
-		for(int x = 0; x<8; x++){
-			for(int y = 0;y<8;y++){
-				Piece p = Game.board.pieces[x][y];
-				if(p.nr() == 0){
-					continue;
-				}
-				graphics.drawImage(p.getImg(), x*50, y*50, null);				
-				
-			}
-		}
-	}
 	
 	public static class ChoseFrame extends JFrame {
 
@@ -85,6 +22,31 @@ public class Gui {
 
 		public ChoseFrame(final String color, final int xx, final int yy) {
 			ActionListener a = null;
+			a = new ActionListener() { @Override public void actionPerformed(ActionEvent e) {
+				checkSpecial.canPlay = true;
+				if(color.equals("black")){
+					switch (((JButton) e.getSource()).getX()) {
+						case 5: Game.board.pieces[xx][yy] = Game.board.getPieceByNumber(10); break;	//queen
+						case 93: Game.board.pieces[xx][yy] = Game.board.getPieceByNumber(8); break;	//rook
+						case 181: Game.board.pieces[xx][yy] = Game.board.getPieceByNumber(6); break;	//bishop
+						case 269: Game.board.pieces[xx][yy] = Game.board.getPieceByNumber(4); break;	//knight
+					default:
+						break;
+					}
+				}
+				if(color.equals("white")){
+					switch (((JButton) e.getSource()).getX()) {
+						case 5: Game.board.pieces[xx][yy] = Game.board.getPieceByNumber(9); break;
+						case 93: Game.board.pieces[xx][yy] = Game.board.getPieceByNumber(7); break;
+						case 181: Game.board.pieces[xx][yy] = Game.board.getPieceByNumber(5); break;
+						case 269: Game.board.pieces[xx][yy] = Game.board.getPieceByNumber(3); break;
+					default:
+						break;
+					}
+				}
+				checkSpecial.canPlay = true;
+				thiss.dispose();
+			}};
 			thiss = this;
 			setTitle("Chose your pease");
 			setResizable(false);
@@ -100,8 +62,9 @@ public class Gui {
 			gbl_contentPane.rowWeights = new double[]{0.0, Double.MIN_VALUE};
 			contentPane.setLayout(gbl_contentPane);
 			
-			JButton queen = new JButton("queen");
+			JButton queen = new JButton();
 			queen.addActionListener(a);
+			queen.setLocation(0, 0);
 			GridBagConstraints gbc_queen = new GridBagConstraints();
 			gbc_queen.fill = GridBagConstraints.BOTH;
 			gbc_queen.insets = new Insets(0, 0, 0, 5);
@@ -109,8 +72,9 @@ public class Gui {
 			gbc_queen.gridy = 0;
 			contentPane.add(queen, gbc_queen);
 			
-			JButton rook = new JButton("rook");
+			JButton rook = new JButton();
 			rook.addActionListener(a);
+			rook.setLocation(1, 0);
 			GridBagConstraints gbc_button = new GridBagConstraints();
 			gbc_button.fill = GridBagConstraints.BOTH;
 			gbc_button.insets = new Insets(0, 0, 0, 5);
@@ -118,8 +82,9 @@ public class Gui {
 			gbc_button.gridy = 0;
 			contentPane.add(rook, gbc_button);
 			
-			JButton bishop = new JButton("queen");
+			JButton bishop = new JButton();
 			bishop.addActionListener(a);
+			bishop.setLocation(2, 0);
 			GridBagConstraints gbc_button_1 = new GridBagConstraints();
 			gbc_button_1.fill = GridBagConstraints.BOTH;
 			gbc_button_1.insets = new Insets(0, 0, 0, 5);
@@ -127,13 +92,15 @@ public class Gui {
 			gbc_button_1.gridy = 0;
 			contentPane.add(bishop, gbc_button_1);
 			
-			JButton knight = new JButton("queen");
-			queen.addActionListener(a);
+			JButton knight = new JButton();
+			knight.addActionListener(a);
+			knight.setLocation(3, 0);
 			GridBagConstraints gbc_button_2 = new GridBagConstraints();
 			gbc_button_2.fill = GridBagConstraints.BOTH;
 			gbc_button_2.gridx = 3;
 			gbc_button_2.gridy = 0;
 			contentPane.add(knight, gbc_button_2);
+			
 			if(color.equalsIgnoreCase("black")){
 				queen.setIcon(new ImageIcon(Game.baseImage.getImageById(3)));
 				rook.setIcon(new ImageIcon(Game.baseImage.getImageById(7)));
@@ -146,31 +113,10 @@ public class Gui {
 				knight.setIcon(new ImageIcon(Game.baseImage.getImageById(12)));
 			}
 			
-			a = new ActionListener() { @Override public void actionPerformed(ActionEvent e) {
-				checkSpecial.canPlay = true;
-				if(color.equals("black")){
-					switch (((JButton) e.getSource()).getX()) {
-						case 1: Game.board.pieces[xx][yy] = Game.board.getPieceByNumber(10); break;
-						case 83: Game.board.pieces[xx][yy] = Game.board.getPieceByNumber(8); break;
-						case 165: Game.board.pieces[xx][yy] = Game.board.getPieceByNumber(6); break;
-						case 247: Game.board.pieces[xx][yy] = Game.board.getPieceByNumber(4); break;
-					default:
-						break;
-					}
-				}
-				if(color.equals("white")){
-					switch (((JButton) e.getSource()).getX()) {
-						case 1: Game.board.pieces[xx][yy] = Game.board.getPieceByNumber(9); break;
-						case 83: Game.board.pieces[xx][yy] = Game.board.getPieceByNumber(7); break;
-						case 165: Game.board.pieces[xx][yy] = Game.board.getPieceByNumber(5); break;
-						case 247: Game.board.pieces[xx][yy] = Game.board.getPieceByNumber(3); break;
-					default:
-						break;
-					}
-				}
-				thiss.dispose();
-				Game.updateAll();
-			}};
+			
+			
+			
+			pack();
 		}
 	}
 

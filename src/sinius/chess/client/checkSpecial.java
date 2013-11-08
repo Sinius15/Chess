@@ -6,6 +6,8 @@ public class checkSpecial {
 	public static boolean canPlay = true;
 	
 	public static void Start(){
+		if(!canPlay)
+			return;
 		canPlay = false;
 		for(int i = 0; i<8; i++){
 			if(Game.board.pieces[i][0].equals(Game.board.getPieceByNumber(1))){

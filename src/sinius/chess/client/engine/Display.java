@@ -21,10 +21,10 @@ public class Display{
 	private DrawPane pane;
 	private GeneralListener listner = new GeneralListener();
 	public GameState gameState;
-	private BufferedImage img = new BufferedImage(800, 800, BufferedImage.TYPE_INT_ARGB);
-	private BufferedImage output = new BufferedImage(800, 800, BufferedImage.TYPE_INT_ARGB);
+	private BufferedImage img;
+	private BufferedImage output;
 	
-	public Dimension contentSize = new Dimension(800, 800);
+	public Dimension contentSize ;
 	
 	private int i;
 	
@@ -32,6 +32,10 @@ public class Display{
 	
 	
 	public Display(int width, int height, String title, GameState state){
+		img = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+		output = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+		contentSize = new Dimension(width, height);
+		
 		gameState = state;
 		frame = new JFrame();
 		pane = new DrawPane();
@@ -80,7 +84,7 @@ public class Display{
 					g.Draw((Graphics2D) graphics);
 			}});
 			stats.Draw((Graphics2D) graphics);
-			gg.drawImage(output, 0, 0, frame.getWidth()-frame.getInsets().left-frame.getInsets().right, frame.getHeight()-frame.getInsets().top-frame.getInsets().bottom, 0, 0, 800, 800, null);
+			gg.drawImage(output, 0, 0, frame.getWidth()-frame.getInsets().left-frame.getInsets().right, frame.getHeight()-frame.getInsets().top-frame.getInsets().bottom, null);
 		}
 	}
 	
@@ -105,8 +109,15 @@ public class Display{
 	}
 	
 	public void resetSize(){
-		frame.setSize(new Dimension(800+frame.getInsets().left+frame.getInsets().right, 800+frame.getInsets().top+frame.getInsets().bottom));
+		frame.setSize(new Dimension(contentSize.width+frame.getInsets().left+frame.getInsets().right, contentSize.height+frame.getInsets().top+frame.getInsets().bottom));
 		frame.revalidate();
+	}
+	
+	public float getZoomX(){
+		return ((float)(frame.getWidth()-frame.getInsets().left-frame.getInsets().right))/contentSize.width;
+	}
+	public float getZoomY(){
+		return ((float)(frame.getHeight()-frame.getInsets().top-frame.getInsets().bottom))/contentSize.height;
 	}
 	
 	private MouseListener getMouseListener(){
@@ -130,9 +141,7 @@ public class Display{
 			
 			@Override
 			public void mouseClicked(final MouseEvent ar) {
-				float zoomX = (frame.getWidth()-frame.getInsets().left-frame.getInsets().right)/800f;
-				float zoomY = (frame.getHeight()-frame.getInsets().top-frame.getInsets().bottom)/800f;
-				final MouseEvent e = new MouseEvent(ar.getComponent(), ar.getID(), ar.getWhen(), ar.getModifiers(), (int)(ar.getX()/zoomX), (int)(ar.getY()/zoomY), ar.getXOnScreen(), ar.getYOnScreen(), ar.getClickCount(), false, ar.getButton());
+				final MouseEvent e = new MouseEvent(ar.getComponent(), ar.getID(), ar.getWhen(), ar.getModifiers(), ar.getX(), ar.getY(), ar.getXOnScreen(), ar.getYOnScreen(), ar.getClickCount(), false, ar.getButton());
 				if(gameState.getGObjects() != null)
 					gameState.getGObjects().doForAll(new editAction<GObject>() { @Override public void action(GObject o) {
 						o.MouseClick(e);

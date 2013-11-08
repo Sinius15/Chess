@@ -97,6 +97,12 @@ public class Board {
 		pieces[selectedPieceX][selectedPieceY].ColorPlacesCan(selectedPieceX, selectedPieceY);
 	}
 	
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 * @return 1 if white, 2 if black, 0 if air
+	 */
 	public int getColor(int x, int y){
 		int nr = pieces[x][y].nr();
 		if(nr == 0){

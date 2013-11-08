@@ -1,23 +1,17 @@
 package sinius.chess.client;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.net.Socket;
-
-import sinius.chess.common.shah.Message;
 
 public class Main {
 	
 	public static int id;
 	
-	@SuppressWarnings({ "resource", "unused" })
+//	@SuppressWarnings({ "resource", "unused" })
 	public static void main(String[] args) throws IOException {
 		
 		Game.init();
 		
-		//internet 
+		/*//internet 
         String hostName = "37.251.48.220";
         int portNumber = 4444;
 
@@ -38,7 +32,7 @@ public class Main {
 				}
 			}catch (IOException e) { }
 		}}, "reader");
-		t.start();
+		t.start();*/
 		
 		
 		

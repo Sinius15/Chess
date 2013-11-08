@@ -6,10 +6,15 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import sinius.chess.client.engine.Display;
+import sinius.chess.client.engine.Engine;
+import sinius.chess.client.state.play.PlayState;
+
 public class Game {
 
-	public static Gui gui;
 	public static Board board;
+	
+	public static Display display;
 	
 	public static Color black = new Color(209, 139, 71);
 	public static Color white = new Color(255, 206, 158);
@@ -17,6 +22,8 @@ public class Game {
 	public static Color white_selected = Color.red;
 	
 	public static PImage baseImage;
+	
+	public static Engine engine;
 	
 	public static void init(){
 		try {
@@ -26,17 +33,15 @@ public class Game {
 		}
 		
 		board = new Board(new File("rec/startGame.chess"));
-		gui = new Gui();
+		display = new Display(400, 400, "Sinis Chess", new PlayState());
+		engine = new Engine();
 	}
 	
-	public static void updateAll(){
-		gui.drawBoard();
+	public static void onTick(){
 		board.cleanSelected();
 		board.setSelected();
-		gui.drawSelected();
-		gui.drawPieces();
-		gui.frame.repaint();
 		checkSpecial.Start();
+		display.onTick();
 	}
 	
 	public static void color(int x, int y){
