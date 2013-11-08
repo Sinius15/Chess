@@ -32,7 +32,7 @@ public class ChessFrame extends JFrame {
 		private static final long serialVersionUID = 1L;
 		@Override
 		public void paintComponents(Graphics g) {
-			g.drawImage(Main.gui.canvas, 0, 0, null);
+			g.drawImage(Game.gui.canvas, 0, 0, null);
 		}
 	}
 }

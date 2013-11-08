@@ -36,14 +36,14 @@ public class Gui {
 
 
 	public void drawBoard(){
-		graphics.setColor(Main.white);
+		graphics.setColor(Game.white);
         for(int row = 0; row<=8;row++){
         	for(int colom = 0; colom <= 8; colom++){
         		graphics.fillRect(colom*50, row*50, 50, 50);
-        		if(graphics.getColor().equals(Main.white)){
-        			graphics.setColor(Main.black);
+        		if(graphics.getColor().equals(Game.white)){
+        			graphics.setColor(Game.black);
 	        	}else{
-	        		graphics.setColor(Main.white);
+	        		graphics.setColor(Game.white);
 	        	}
         	}
         }
@@ -52,7 +52,7 @@ public class Gui {
 	public void drawSelected(){
         for(int x = 0; x<8;x++){
         	for(int y = 0; y < 8; y++){
-        		if(Main.board.selected[y][x]){
+        		if(Game.board.selected[y][x]){
         			graphics.setColor(Color.pink);
         			graphics.fillRect(x*50, y*50, 50, 50);
         			
@@ -67,7 +67,7 @@ public class Gui {
 	public void drawPieces(){
 		for(int x = 0; x<8; x++){
 			for(int y = 0;y<8;y++){
-				Piece p = Main.board.pieces[x][y];
+				Piece p = Game.board.pieces[x][y];
 				if(p.nr() == 0){
 					continue;
 				}
@@ -135,41 +135,41 @@ public class Gui {
 			gbc_button_2.gridy = 0;
 			contentPane.add(knight, gbc_button_2);
 			if(color.equalsIgnoreCase("black")){
-				queen.setIcon(new ImageIcon(ImageLoader.baseImage.getImageById(3)));
-				rook.setIcon(new ImageIcon(ImageLoader.baseImage.getImageById(7)));
-				bishop.setIcon(new ImageIcon(ImageLoader.baseImage.getImageById(9)));
-				knight.setIcon(new ImageIcon(ImageLoader.baseImage.getImageById(11)));
+				queen.setIcon(new ImageIcon(Game.baseImage.getImageById(3)));
+				rook.setIcon(new ImageIcon(Game.baseImage.getImageById(7)));
+				bishop.setIcon(new ImageIcon(Game.baseImage.getImageById(9)));
+				knight.setIcon(new ImageIcon(Game.baseImage.getImageById(11)));
 			}else{
-				queen.setIcon(new ImageIcon(ImageLoader.baseImage.getImageById(4)));
-				rook.setIcon(new ImageIcon(ImageLoader.baseImage.getImageById(8)));
-				bishop.setIcon(new ImageIcon(ImageLoader.baseImage.getImageById(10)));
-				knight.setIcon(new ImageIcon(ImageLoader.baseImage.getImageById(12)));
+				queen.setIcon(new ImageIcon(Game.baseImage.getImageById(4)));
+				rook.setIcon(new ImageIcon(Game.baseImage.getImageById(8)));
+				bishop.setIcon(new ImageIcon(Game.baseImage.getImageById(10)));
+				knight.setIcon(new ImageIcon(Game.baseImage.getImageById(12)));
 			}
 			
 			a = new ActionListener() { @Override public void actionPerformed(ActionEvent e) {
-				Main.canPlay = true;
+				checkSpecial.canPlay = true;
 				if(color.equals("black")){
 					switch (((JButton) e.getSource()).getX()) {
-						case 1: Main.board.pieces[xx][yy] = Main.board.getPieceByNumber(10); break;
-						case 83: Main.board.pieces[xx][yy] = Main.board.getPieceByNumber(8); break;
-						case 165: Main.board.pieces[xx][yy] = Main.board.getPieceByNumber(6); break;
-						case 247: Main.board.pieces[xx][yy] = Main.board.getPieceByNumber(4); break;
+						case 1: Game.board.pieces[xx][yy] = Game.board.getPieceByNumber(10); break;
+						case 83: Game.board.pieces[xx][yy] = Game.board.getPieceByNumber(8); break;
+						case 165: Game.board.pieces[xx][yy] = Game.board.getPieceByNumber(6); break;
+						case 247: Game.board.pieces[xx][yy] = Game.board.getPieceByNumber(4); break;
 					default:
 						break;
 					}
 				}
 				if(color.equals("white")){
 					switch (((JButton) e.getSource()).getX()) {
-						case 1: Main.board.pieces[xx][yy] = Main.board.getPieceByNumber(9); break;
-						case 83: Main.board.pieces[xx][yy] = Main.board.getPieceByNumber(7); break;
-						case 165: Main.board.pieces[xx][yy] = Main.board.getPieceByNumber(5); break;
-						case 247: Main.board.pieces[xx][yy] = Main.board.getPieceByNumber(3); break;
+						case 1: Game.board.pieces[xx][yy] = Game.board.getPieceByNumber(9); break;
+						case 83: Game.board.pieces[xx][yy] = Game.board.getPieceByNumber(7); break;
+						case 165: Game.board.pieces[xx][yy] = Game.board.getPieceByNumber(5); break;
+						case 247: Game.board.pieces[xx][yy] = Game.board.getPieceByNumber(3); break;
 					default:
 						break;
 					}
 				}
 				thiss.dispose();
-				Main.updateAll();
+				Game.updateAll();
 			}};
 		}
 	}

@@ -3,19 +3,21 @@ package sinius.chess.client;
 
 public class checkSpecial {
 
+	public static boolean canPlay = true;
+	
 	public static void Start(){
-		Main.canPlay = false;
+		canPlay = false;
 		for(int i = 0; i<8; i++){
-			if(Main.board.pieces[i][0].equals(Main.board.getPieceByNumber(1))){
+			if(Game.board.pieces[i][0].equals(Game.board.getPieceByNumber(1))){
 				Gui.showPionChoseSceen("white", i, 0);
 				return;
 			}
-			if(Main.board.pieces[i][7].equals(Main.board.getPieceByNumber(2))){
+			if(Game.board.pieces[i][7].equals(Game.board.getPieceByNumber(2))){
 				Gui.showPionChoseSceen("black", i, 7);
 				return;
 			}
 		}
-		Main.canPlay = true;
+		canPlay = true;
 	}
 	
 }

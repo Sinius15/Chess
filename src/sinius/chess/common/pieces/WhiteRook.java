@@ -2,14 +2,13 @@ package sinius.chess.common.pieces;
 
 import java.awt.Image;
 
-import sinius.chess.client.ImageLoader;
-import sinius.chess.client.Main;
+import sinius.chess.client.Game;
 
 public class WhiteRook implements Piece{
 
 	@Override
 	public Image getImg() {
-		return ImageLoader.baseImage.getImageById(8);
+		return Game.baseImage.getImageById(8);
 	}
 
 
@@ -43,12 +42,12 @@ public class WhiteRook implements Piece{
 		if(x<0 || x>7 || y<0 || y>7){
 			return false;
 		}
-		if(Main.board.pieces[x][y].nr() == 0){
-			Main.color(x, y);
+		if(Game.board.pieces[x][y].nr() == 0){
+			Game.color(x, y);
 			return true;
 		}else{
-			if(Main.board.getColor(x, y) == 2){
-				Main.color(x, y);
+			if(Game.board.getColor(x, y) == 2){
+				Game.color(x, y);
 				return false;
 			}
 		}

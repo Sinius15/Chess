@@ -2,14 +2,13 @@ package sinius.chess.common.pieces;
 
 import java.awt.Image;
 
-import sinius.chess.client.ImageLoader;
-import sinius.chess.client.Main;
+import sinius.chess.client.Game;
 
 public class WhitePawn implements Piece{
 
 	@Override
 	public Image getImg() {
-		return ImageLoader.baseImage.getImageById(8);
+		return Game.baseImage.getImageById(8);
 	}
 
 
@@ -25,23 +24,23 @@ public class WhitePawn implements Piece{
 			return;
 		}
 		if(x > 0){								//slaan linksbovne
-			if(Main.board.getColor(x-1, y-1) == 2){			
-				Main.color(x-1, y-1);
+			if(Game.board.getColor(x-1, y-1) == 2){			
+				Game.color(x-1, y-1);
 			}
 		}
 		if(x < 7){								//slaan rechtsboven
-			if(Main.board.getColor(x+1, y-1) == 2){ 
-				Main.color(x+1, y-1);
+			if(Game.board.getColor(x+1, y-1) == 2){ 
+				Game.color(x+1, y-1);
 			}
 		}
 		boolean b = false;
-		if(Main.board.pieces[x][y-1].nr() == 0){ //1 omhoog
+		if(Game.board.pieces[x][y-1].nr() == 0){ //1 omhoog
 			b = true;
-			Main.color(x, y-1);
+			Game.color(x, y-1);
 		}
 		if(b){
 			if(y==6){							 //twee omhoog bij startpositie
-				if(canGo(x, y-2)) Main.color(x, y-2);
+				if(canGo(x, y-2)) Game.color(x, y-2);
 			}
 		}
 		
@@ -51,7 +50,7 @@ public class WhitePawn implements Piece{
 		if(x<0 || x>7 || y<0 || y>7){
 			return false;
 		}
-		if(Main.board.pieces[x][y].nr() == 0){
+		if(Game.board.pieces[x][y].nr() == 0){
 			return true;
 		}else{
 			return false;

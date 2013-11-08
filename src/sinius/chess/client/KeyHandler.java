@@ -22,7 +22,7 @@ public class KeyHandler implements  MouseListener{
 
 	@Override
 	public void mousePressed(MouseEvent event) {
-		if(!Main.canPlay){
+		if(!checkSpecial.canPlay){
 			return;
 		}
 		
@@ -31,31 +31,31 @@ public class KeyHandler implements  MouseListener{
 			int x = (event.getX()/50);
 			int y = (event.getY()/50);
 			
-			if(Main.board.selected[y][x]){
-				Main.board.pieces[x][y] = Main.board.pieces[Main.board.selectedPieceX][Main.board.selectedPieceY];
-				Main.board.pieces[Main.board.selectedPieceX][Main.board.selectedPieceY] = Main.board.getPieceByNumber(0);
-				Main.board.selectedPieceX = -1;
-				Main.board.selectedPieceY = -1;
-				Main.updateAll();
+			if(Game.board.selected[y][x]){
+				Game.board.pieces[x][y] = Game.board.pieces[Game.board.selectedPieceX][Game.board.selectedPieceY];
+				Game.board.pieces[Game.board.selectedPieceX][Game.board.selectedPieceY] = Game.board.getPieceByNumber(0);
+				Game.board.selectedPieceX = -1;
+				Game.board.selectedPieceY = -1;
+				Game.updateAll();
 				return;
 			}
 			
-			if(Main.board.pieces[x][y].nr() == 0){
-				Main.board.selectedPieceX = -1;
-				Main.board.selectedPieceY = -1;
-				Main.updateAll();
+			if(Game.board.pieces[x][y].nr() == 0){
+				Game.board.selectedPieceX = -1;
+				Game.board.selectedPieceY = -1;
+				Game.updateAll();
 			}else{
-				Main.board.selectedPieceX = x;
-				Main.board.selectedPieceY = y;
-				Main.updateAll();
+				Game.board.selectedPieceX = x;
+				Game.board.selectedPieceY = y;
+				Game.updateAll();
 			}
 			
 		}
 		
 		if(event.getButton() == MouseEvent.BUTTON3){	//rechter muis
-			Main.board.selectedPieceX = -1;
-			Main.board.selectedPieceY = -1;
-			Main.updateAll();
+			Game.board.selectedPieceX = -1;
+			Game.board.selectedPieceY = -1;
+			Game.updateAll();
 		}
 	}
 

@@ -2,14 +2,13 @@ package sinius.chess.common.pieces;
 
 import java.awt.Image;
 
-import sinius.chess.client.ImageLoader;
-import sinius.chess.client.Main;
+import sinius.chess.client.Game;
 
 public class BlackKnight implements Piece{
 
 	@Override
 	public Image getImg() {
-		return ImageLoader.baseImage.getImageById(11);
+		return Game.baseImage.getImageById(11);
 	}
 
 
@@ -32,17 +31,17 @@ public class BlackKnight implements Piece{
 	}
 
 	private void doall(int x, int y){
-		if(canGo(x,y)) Main.color(x, y);
+		if(canGo(x,y)) Game.color(x, y);
 	}
 	
 	private boolean canGo(int x,  int y){
 		if(x<0 || x>7 || y<0 || y>7){
 			return false;
 		}
-		if(Main.board.pieces[x][y].nr() == 0){
+		if(Game.board.pieces[x][y].nr() == 0){
 			return true;
 		}else{
-			if(Main.board.getColor(x, y) == 1){
+			if(Game.board.getColor(x, y) == 1){
 				return true;
 			}
 		}

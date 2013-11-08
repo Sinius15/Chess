@@ -1,8 +1,6 @@
 package sinius.chess.client;
 
-import java.awt.Color;
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
@@ -11,27 +9,13 @@ import java.net.Socket;
 import sinius.chess.common.shah.Message;
 
 public class Main {
-
-	public static Gui gui;
-	public static Board board;
-	
-	public static Color black = new Color(209, 139, 71);
-	public static Color white = new Color(255, 206, 158);
-	public static Color black_selected = Color.red;
-	public static Color white_selected = Color.red;
-	
-	public static boolean canPlay;
 	
 	public static int id;
 	
 	@SuppressWarnings({ "resource", "unused" })
 	public static void main(String[] args) throws IOException {
-		ImageLoader.init();
 		
-		board = new Board(new File("rec/startGame.chess"));
-		gui = new Gui();
-		updateAll();
-		updateAll();
+		Game.init();
 		
 		//internet 
         String hostName = "37.251.48.220";
@@ -60,18 +44,6 @@ public class Main {
 		
 	}
 	
-	public static void updateAll(){
-		gui.drawBoard();
-		board.cleanSelected();
-		board.setSelected();
-		gui.drawSelected();
-		gui.drawPieces();
-		gui.frame.repaint();
-		checkSpecial.Start();
-	}
-	
-	public static void color(int x, int y){
-		board.selected[y][x] = true;
-	}
+
 
 }
