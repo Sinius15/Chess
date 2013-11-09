@@ -9,6 +9,7 @@ import sinius.chess.client.engine.GButton;
 import sinius.chess.client.engine.GObject;
 import sinius.chess.client.state.GameState;
 import sinius.chess.client.state.GrapicsLayer;
+import sinius.chess.client.state.multiplayer.MultiPlayerState;
 import sinius.chess.client.state.play.PlayState;
 import sinius.chess.common.SynchroniezedList;
 
@@ -27,6 +28,14 @@ public class MenuState implements GameState{
 		}});
 		gObjcs.add(sp);
 		
+		GButton mp = new GButton(100, 250, 200, 50);
+		mp.setText("Multi Player");
+		mp.setButtonColor(Color.blue);
+		mp.setTextColor(Color.white);
+		mp.setAction(new ActionListener() {@Override public void actionPerformed(ActionEvent e) {
+			Game.display.setGameState(new MultiPlayerState());
+		}});
+		gObjcs.add(mp);
 	}
 	
 	@Override

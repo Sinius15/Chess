@@ -10,7 +10,6 @@ import javax.swing.UIManager;
 import sinius.chess.client.engine.Display;
 import sinius.chess.client.engine.Engine;
 import sinius.chess.client.state.menu.MenuState;
-import sinius.chess.client.state.play.PlayState;
 
 public class Game {
 

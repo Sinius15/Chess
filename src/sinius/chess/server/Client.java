@@ -27,11 +27,15 @@ public class Client {
 			in = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
 		} catch (IOException e){
 			e.printStackTrace();
+			Main.gui.errorMessage("error while creating in and output");
 			return;
 		}
+		sendMessage(new Message("Server", "id", Integer.toString(id)));
+		
 		input.start();
 		living.start();
-		out.println(new Message("Server", "id", Integer.toString(id)).encode());
+		
+		
 	}
 	
 	public void stop(){
@@ -52,7 +56,7 @@ public class Client {
 	private Thread input = new Thread(new Runnable() {@Override public void run() {
 		String inputLine;
 		while(connected){
-			try{
+			try{ 
 				inputLine = in.readLine();
 				Message msg = Message.decode(inputLine);
 				if(msg.type.equals("alive")){
@@ -60,7 +64,9 @@ public class Client {
 					continue;
 				}
 				received.add(msg);
-			}catch(Exception e){}
+			}catch(Exception e){
+				
+			}
 		}
 	}});
 	
@@ -70,16 +76,16 @@ public class Client {
 			allive = false;
 			sendMessage(new Message("Server", "alive", "Are you alive?"));
 			try {
-				Thread.sleep(1000);
+				Thread.sleep(2000);
 			} catch (InterruptedException e) {
-				e.printStackTrace();
+				Main.gui.errorMessage("error while trying to sleep");
 			}
 			if(!allive)
 				Main.Disconnected(id);
 			try {
-				Thread.sleep(1000);
+				Thread.sleep(3000);
 			} catch (InterruptedException e) {
-				e.printStackTrace();
+				Main.gui.errorMessage("error while trying to sleep");
 			}
 		}
 	}});
