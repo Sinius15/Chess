@@ -5,9 +5,11 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.UIManager;
 
 import sinius.chess.client.engine.Display;
 import sinius.chess.client.engine.Engine;
+import sinius.chess.client.state.menu.MenuState;
 import sinius.chess.client.state.play.PlayState;
 
 public class Game {
@@ -33,7 +35,7 @@ public class Game {
 		}
 		
 		board = new Board(new File("rec/startGame.chess"));
-		display = new Display(400, 400, "Sinis Chess", new PlayState());
+		display = new Display(400, 450, "Sinis Chess", new MenuState(), UIManager.getColor("Panel.background"));
 		engine = new Engine();
 	}
 	

@@ -1,5 +1,6 @@
 package sinius.chess.client.engine;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -23,7 +24,7 @@ public class Display{
 	public GameState gameState;
 	private BufferedImage img;
 	private BufferedImage output;
-	
+	private Color bgColor;
 	public Dimension contentSize ;
 	
 	private int i;
@@ -31,10 +32,11 @@ public class Display{
 	private StatsOverlay stats = new StatsOverlay();
 	
 	
-	public Display(int width, int height, String title, GameState state){
+	public Display(int width, int height, String title, GameState state, Color backGround){
 		img = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
 		output = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
 		contentSize = new Dimension(width, height);
+		bgColor = backGround;
 		
 		gameState = state;
 		frame = new JFrame();
@@ -69,7 +71,6 @@ public class Display{
 	public class DrawPane extends JPanel{
 		private static final long serialVersionUID = -6825107813851526680L;
 		public void paintComponent(Graphics gg){
-			
 			final Graphics graphics = output.getGraphics();
 			
 			graphics.drawImage(img, 0, 0, null);
@@ -89,6 +90,9 @@ public class Display{
 	}
 	
 	public void reDraw(){
+		output.getGraphics().setColor(bgColor);
+		output.getGraphics().fillRect(0, 0, contentSize.width, contentSize.height);
+		
 		if(gameState.getGraphicsLayers() != null)
 			for(i = 0 ; i<11 ; i++){
 				gameState.getGraphicsLayers().doForAll(new editAction<GrapicsLayer>() { @Override public void action(GrapicsLayer l) {
@@ -141,7 +145,7 @@ public class Display{
 			
 			@Override
 			public void mouseClicked(final MouseEvent ar) {
-				final MouseEvent e = new MouseEvent(ar.getComponent(), ar.getID(), ar.getWhen(), ar.getModifiers(), ar.getX(), ar.getY(), ar.getXOnScreen(), ar.getYOnScreen(), ar.getClickCount(), false, ar.getButton());
+				final MouseEvent e = new MouseEvent(ar.getComponent(), ar.getID(), ar.getWhen(), ar.getModifiers(), (int)(ar.getX()/getZoomX()), (int)(ar.getY()/getZoomY()), ar.getXOnScreen(), ar.getYOnScreen(), ar.getClickCount(), false, ar.getButton());
 				if(gameState.getGObjects() != null)
 					gameState.getGObjects().doForAll(new editAction<GObject>() { @Override public void action(GObject o) {
 						o.MouseClick(e);

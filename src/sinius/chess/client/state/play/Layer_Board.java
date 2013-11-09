@@ -15,15 +15,18 @@ public class Layer_Board implements GrapicsLayer{
 	@Override
 	public void Draw(Graphics2D graphics) {
 		graphics.setColor(Game.white);
-        for(int row = 0; row<=8;row++){
-        	for(int colom = 0; colom <= 8; colom++){
+        for(int row = 0; row<8 ; row++){
+        	for(int colom = 0; colom < 8; colom++){
         		graphics.fillRect(colom*50, row*50, 50, 50);
-        		if(graphics.getColor().equals(Game.white)){
+        		if(graphics.getColor().equals(Game.white))
         			graphics.setColor(Game.black);
-	        	}else{
+        		else
 	        		graphics.setColor(Game.white);
-	        	}
         	}
+        	if(graphics.getColor().equals(Game.white))
+    			graphics.setColor(Game.black);
+    		else
+        		graphics.setColor(Game.white);
         }
 	}
 

@@ -20,7 +20,7 @@ public class Engine{
 		return new Runnable() { @Override public void run() {
 			while(isRunning){ 
 				Game.onTick();
-				try {
+				try { 
 					Thread.sleep(10);   //aiming for 100tps
 				} catch (InterruptedException e) {
 					e.printStackTrace();

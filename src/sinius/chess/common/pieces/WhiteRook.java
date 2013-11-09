@@ -8,7 +8,7 @@ public class WhiteRook implements Piece{
 
 	@Override
 	public Image getImg() {
-		return Game.baseImage.getImageById(8);
+		return Game.baseImage.getImageById(6);
 	}
 
 
