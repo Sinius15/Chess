@@ -2,7 +2,6 @@ package sinius.chess.client.state.multiplayer;
 
 import java.awt.Color;
 import java.awt.event.MouseEvent;
-import java.io.IOException;
 
 import sinius.chess.client.Game;
 import sinius.chess.client.checkSpecial;
@@ -35,17 +34,9 @@ public class MultiPlayerState implements GameState {
 		status.setColor(Color.black);
 		gObjcs.add(status);
 		
-		Thread connector = new Thread(new Runnable() {@Override public void run() {
-			try {
-				server = new Server("37.251.48.220", 4444);
-				status.setText("Connected!");
-			} catch (IOException e) {
-				e.printStackTrace();
-				status.setColor(Color.red);
-				status.setText("Could not connect to the server.");
-			}
-		}});
-		connector.start();
+		Game.display.getFrame().setVisible(false);
+		IPFrame f = new IPFrame();
+		f.setVisible(true);
 	}
 	
 	@Override

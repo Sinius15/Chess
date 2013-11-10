@@ -10,6 +10,8 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 import sinius.chess.client.state.GameState;
 import sinius.chess.client.state.GrapicsLayer;
@@ -33,6 +35,13 @@ public class Display{
 	
 	
 	public Display(int width, int height, String title, GameState state, Color backGround){
+		
+		try {
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e2) {
+			e2.printStackTrace();
+		}
+		
 		img = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
 		output = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
 		contentSize = new Dimension(width, height);
