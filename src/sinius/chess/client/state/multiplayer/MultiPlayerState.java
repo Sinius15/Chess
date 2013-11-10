@@ -21,11 +21,13 @@ public class MultiPlayerState implements GameState {
 	SynchroniezedList<GObject> gObjcs = new SynchroniezedList<>();
 	
 	boolean youAreWhite, myTurn;
-	GText status;
-	Server server;
+	GText status, color, opponent;
 	
+	public static MultiPlayerState thiss;
+	public static Server server;
 	
 	public MultiPlayerState(){
+		thiss = this;
 		layers.add(new Layer_Board());
 		layers.add(new Layer_Selected());
 		layers.add(new Layer_Pieces());
@@ -33,6 +35,14 @@ public class MultiPlayerState implements GameState {
 		status = new GText("waiting for opponent...", 10, 420);
 		status.setColor(Color.black);
 		gObjcs.add(status);
+		
+		color = new GText("Your color is ", 10, 440);
+		color.setColor(Color.black);
+		gObjcs.add(color);
+		
+		opponent = new GText("you are plaing againts ", 200, 420);
+		opponent.setColor(Color.black);
+		gObjcs.add(opponent);
 		
 		Game.display.getFrame().setVisible(false);
 		IPFrame f = new IPFrame();
@@ -83,6 +93,7 @@ public class MultiPlayerState implements GameState {
 					status.setText("Turn: you" );
 				else
 					status.setText("Turn: opponent" );
+				server.mh.Move();
 				return;
 			}
 			if(Game.board.pieces[x][y].nr() == 0){

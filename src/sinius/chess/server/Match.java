@@ -17,6 +17,9 @@ public class Match {
 	private String latestBoard = startBoard;
 	
 	public Match(Client a, Client b){
+		
+		Main.gui.gameMessage("Starting a match between " + a.name + " and " + b.name);
+		
 		white = a;
 		black = b;
 		

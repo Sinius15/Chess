@@ -22,6 +22,8 @@ public class Server {
 	String ip, myName;
 	int port;
 	
+	MatchHandler mh;
+	
 	public Server(String host, int port, String myName) throws UnknownHostException, IOException{
 		this.ip = host;
 		this.port = port;
@@ -67,13 +69,25 @@ public class Server {
 					int yesno = JOptionPane.showConfirmDialog(OpponentFrame.thiss, "Player " + msg.message + " wants to fight you." + System.lineSeparator() + 
 							"Do you accept this challange?", "fight request", JOptionPane.YES_NO_OPTION);
 					if(yesno != JOptionPane.YES_OPTION){
-						sendMessage(new Message("client" + id, "match_request_answer", "no_" + msg.message));
+						sendMessage(new Message("client" + id, "match_request_answer", "no_" + msg.sender));
 						return;
 					}
-					sendMessage(new Message("client" + id, "match_request_answer", "yes_" + msg.message));
+					sendMessage(new Message("client" + id, "match_request_answer", "yes_" + msg.sender));
 				}});
 				t.start();
 			}
+			
+			if(msg.type.equals("match_request_answer")){
+				if(msg.message.startsWith("no_")){
+					JOptionPane.showMessageDialog(OpponentFrame.thiss, msg.message.replace("no_", "") + " does not want to fight you.", "match decline", JOptionPane.INFORMATION_MESSAGE);
+				}
+			}
+			if(msg.type.equals("match_start")){
+				mh = new MatchHandler(this, MultiPlayerState.thiss);
+				mh.handleIn(msg);
+			}
+			if(mh != null)
+				mh.handleIn(msg);
 		}
 	}
 	

@@ -78,10 +78,10 @@ public class Client {
 				Main.getClient(msg.message).sendMessage(msg);
 			if(msg.type.equals("match_request_answer")){
 				if(msg.message.startsWith("yes_")){
-					Main.createMatch(this, Main.getClient(msg.message.replace("yes_", "")));
+					Main.createMatch(this, Main.getClient(Integer.parseInt(msg.message.replace("yes_client", ""))));
 				}
 				if(msg.message.startsWith("no_")){
-					Main.getClient(msg.message.replace("no_", "")).sendMessage(msg);
+					Main.getClient(Integer.parseInt(msg.message.replace("no_client", ""))).sendMessage(msg);
 				}
 				
 			}
@@ -102,7 +102,7 @@ public class Client {
 			allive = false;
 			sendMessage(new Message("Server", "alive", "Are you alive?"));
 			try {
-				Thread.sleep(2000);
+				Thread.sleep(5000);
 			} catch (InterruptedException e) {
 				Main.gui.errorMessage("error while trying to sleep");
 			}

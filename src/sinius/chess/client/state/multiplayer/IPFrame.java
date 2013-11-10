@@ -69,8 +69,8 @@ public class IPFrame extends JFrame {
 		btnConnect.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					Server s = new Server(textField.getText(), (int) spinner.getValue(), txtName.getText());
-					OpponentFrame f = new OpponentFrame(s);
+					MultiPlayerState.server = new Server(textField.getText(), (int) spinner.getValue(), txtName.getText());
+					OpponentFrame f = new OpponentFrame(MultiPlayerState.server);
 					f.setVisible(true);
 					thiss.dispose();
 				} catch (IOException e1) {

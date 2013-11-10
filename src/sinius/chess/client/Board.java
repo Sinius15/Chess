@@ -57,6 +57,29 @@ public class Board {
 		}
 	}
 
+	public void setBoard(String a){
+		String[] in = a.split(";");
+		for(int x = 0; x<8;x++){
+			String[] dat = in[x].split(",");
+			for(int y = 0; y<8;y++){
+				pieces[y][x] = getPieceByNumber(Integer.parseInt(dat[y]));
+				selected[y][x] = false;
+			}
+		}
+	}
+	
+	public String getBoard(){
+		String a = "";
+		for(int x = 0; x<8;x++){
+			String builder = "";
+			for(int y = 0; y<8 ; y++){
+				builder = builder + pieces[y][x].nr() + ",";
+			}
+			a = a + builder + ";";
+		}
+		return a;
+	}
+	
 	private void fillPieceList() {
 		avalablePieces.add(new Empty());
 		avalablePieces.add(new WhitePawn());
