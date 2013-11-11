@@ -28,12 +28,12 @@ public class Game {
 	
 	public static void init(){
 		try {
-			baseImage = new PImage(ImageIO.read(new File("rec/pieces.png")));
+			baseImage = new PImage(ImageIO.read(new File("\\rec\\pieces.png")));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		
-		board = new Board(new File("rec/startGame.chess"));
+		board = new Board(new File("\\rec\\startGame.chess"));
 		display = new Display(400, 450, "Sinis Chess", new MenuState(), UIManager.getColor("Panel.background"));
 		engine = new Engine();
 	}
