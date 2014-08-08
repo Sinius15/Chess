@@ -21,6 +21,7 @@ public class Game {
 	public static Color white = new Color(255, 206, 158);
 	public static Color black_selected = Color.red;
 	public static Color white_selected = Color.red;
+	public static File mainFolder;;
 	
 	public static PImage baseImage;
 	
@@ -28,12 +29,13 @@ public class Game {
 	
 	public static void init(){
 		try {
-			baseImage = new PImage(ImageIO.read(new File("\\rec\\pieces.png")));
+			System.out.println(new File(mainFolder.getAbsolutePath() + "//rec//pieces.png").getAbsolutePath());
+			baseImage = new PImage(ImageIO.read(new File(mainFolder.getAbsolutePath() + "//rec//pieces.png")));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		
-		board = new Board(new File("\\rec\\startGame.chess"));
+		board = new Board(new File(mainFolder.getAbsolutePath() + "//rec//startGame.chess"));
 		display = new Display(400, 450, "Sinis Chess", new MenuState(), UIManager.getColor("Panel.background"));
 		engine = new Engine();
 	}
